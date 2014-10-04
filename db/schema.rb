@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141004031728) do
+ActiveRecord::Schema.define(version: 20141004032704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,11 +28,18 @@ ActiveRecord::Schema.define(version: 20141004031728) do
     t.datetime "updated_at"
   end
 
+  create_table "pods_users", id: false, force: true do |t|
+    t.integer "user_id"
+    t.integer "pod_id"
+  end
+
   create_table "pool_profiles", force: true do |t|
     t.text     "goals"
     t.text     "skills"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "pool_id"
   end
 
   create_table "pools", force: true do |t|
@@ -43,6 +50,7 @@ ActiveRecord::Schema.define(version: 20141004031728) do
 
   create_table "seen_users", force: true do |t|
     t.boolean "right_swipe", default: false
+    t.integer "user_id"
   end
 
   create_table "users", force: true do |t|
