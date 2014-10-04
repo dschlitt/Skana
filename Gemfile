@@ -48,3 +48,5 @@ gem 'omniauth'
 gem 'omniauth-github'
 
 ruby "2.1.2"
+
+gem 'figaro', '1.0.0'
