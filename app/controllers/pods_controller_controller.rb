@@ -15,7 +15,7 @@ class PodsControllerController < ApplicationController
   end
 
   def leave
-    current.pods.find(params[:id]).destroy
+    current_user.pods.find(params[:id]).destroy
     redirect :root
   end
 
