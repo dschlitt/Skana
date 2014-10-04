@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141004081527) do
+ActiveRecord::Schema.define(version: 20141004145050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,11 +57,11 @@ ActiveRecord::Schema.define(version: 20141004081527) do
   end
 
   create_table "swipes", force: true do |t|
-    t.boolean "right_swipe", default: false
+    t.boolean "right_swipe",          default: false
     t.integer "user_id"
-    t.integer "seen_user"
+    t.integer "seen_pool_profile_id"
     t.integer "pool_id"
-    t.integer "count",       default: 0
+    t.integer "count",                default: 0
   end
 
   create_table "users", force: true do |t|
