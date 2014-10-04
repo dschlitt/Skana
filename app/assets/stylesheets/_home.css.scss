@@ -1,0 +1,40 @@
+#home {
+  height: 100%;
+  width: 100%;
+
+  #logo {
+    text-align: center;
+
+    img {
+      width: 100%;
+    }
+
+    h1 {
+      margin-top: -40%;
+      margin-left: 13%;
+      text-align: left;
+      margin-bottom: 5%;
+      padding: 0;
+    }
+
+    p {
+      font-size: 18px;
+      font-weight: thin;
+    }
+  }
+
+  @media (min-width: $screen-sm-min) {
+  }
+
+  @media (min-width: $screen-md-min) {
+    h1 {
+      font-size: 44px;
+    }
+  }
+
+  @media (min-width: $screen-lg-min) {
+    h1 {
+      font-size: 51px;
+    }
+  }
+}
