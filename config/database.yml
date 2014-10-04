@@ -81,5 +81,4 @@ test:
 production:
   <<: *default
   database: geeker_production
-  username: geeker
   password: <%= ENV['GEEKER_DATABASE_PASSWORD'] %>
