@@ -50,3 +50,4 @@ gem 'omniauth-github'
 ruby "2.1.2"
 
 gem 'figaro', '1.0.0'
+gem 'better_errors', '2.0.0'

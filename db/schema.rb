@@ -64,9 +64,7 @@ ActiveRecord::Schema.define(version: 20141004060322) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "full_name"
+    t.string   "name"
     t.string   "email",                  default: "", null: false
     t.datetime "birth_date"
     t.text     "about"
@@ -81,6 +79,9 @@ ActiveRecord::Schema.define(version: 20141004060322) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "avatar"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
