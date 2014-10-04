@@ -15,10 +15,11 @@ class User < ActiveRecord::Base
   has_many :created_pools, class_name: 'Pool', foreign_key: 'creator_id'
 
   def self.from_omniauth(auth)
-    user = where(provider: auth.provider, uid: auth.uid).first_or_initialize
+    user = where(provider: auth.provider, uid: auth.uid).first_or_initialize do |u|
+      u.name = auth.info.name || auth.info.nickname
+    end
     user.email = auth.info.email
     user.password = Devise.friendly_token
-    user.name = auth.info.name || auth.info.nickname  # assuming the user model has a name
     user.avatar = auth.info.image # assuming the user model has an image
     user.save
     user
