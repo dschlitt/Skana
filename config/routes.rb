@@ -3,4 +3,5 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :update, :edit, :destroy]
   resources :pools
+  resources :pods, only: [:index, :show]
 end
