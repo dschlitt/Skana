@@ -41,4 +41,6 @@ gem 'spring',        group: :development
 # For heroku
 gem 'rails_12factor', group: :production
 
+gem 'high_voltage', '~> 2.2.1'
+
 ruby "2.1.2"
