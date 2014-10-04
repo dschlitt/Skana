@@ -1,14 +1,15 @@
 <div id='home'>
 
-Yay, this is the home page!
-
-<% if current_user %>
-  <%= current_user.email %>
-  <%= image_tag current_user.avatar %>
-
-  <%= link_to "Log out", destroy_user_session_path, method: :delete %>
-<% else %>
-  <%= link_to "GitHub", user_omniauth_authorize_path(:github), class: 'btn' %>
-<% end %>
+  <div class='container'>
+    <div class='row'>
+      <div id='logo' class='col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3'>
+        <%= image_tag "logo.png" %>
+        <h1>Skana</h1>
+        <p>Quickly and naturally find team members for any group project.</p>
+        <%= link_to "Login with GitHub", user_omniauth_authorize_path(:github),
+          class: 'btn' %>
+      </div>
+    </div>
+  </div>
 
 </div>
