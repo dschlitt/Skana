@@ -158,7 +158,6 @@ PLATFORMS
 
 DEPENDENCIES
   better_errors (= 2.0.0)
-  coffee-rails (~> 4.0.0)
   devise
   figaro (= 1.0.0)
   high_voltage (~> 2.2.1)
