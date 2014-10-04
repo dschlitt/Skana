@@ -43,4 +43,8 @@ gem 'rails_12factor', group: :production
 
 gem 'high_voltage', '~> 2.2.1'
 
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-github'
+
 ruby "2.1.2"
