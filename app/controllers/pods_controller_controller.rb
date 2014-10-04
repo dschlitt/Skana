@@ -10,8 +10,13 @@ class PodsControllerController < ApplicationController
   end
 
   def show
-    @pod = current_user.pods.find params[:pod_id]
+    @pod = current_user.pods.find params[:id]
     respond_with @pod
+  end
+
+  def leave
+    current.pods.find(params[:id]).destroy
+    redirect :root
   end
 
 end
