@@ -57,7 +57,7 @@
       addMessage(message_data[i]);
     }
     setTimeout(function() {
-      $messages.animate({scrollTop: $messages.prop('scrollHeight')});
+      $messages.animate({scrollTop: 10000});
     }, 0)
   })
 
@@ -93,7 +93,7 @@
     });
 
     $input.val('');
-    $messages.animate({scrollTop: $messages.prop('scrollHeight')});
+    $messages.animate({scrollTop: 10000});
 
 
     //channel.trigger('messages.created', data);
