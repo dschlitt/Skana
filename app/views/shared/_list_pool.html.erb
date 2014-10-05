@@ -1,4 +1,7 @@
 <%= link_to pool_path(pool.id), class: "list-group-item" do %>
   <%= pool.name %>
-  <span class="badge badge-primary"><%= pool.users.size %></span>
+  <span class="badge badge-primary">
+    <%= pool.users.size %>
+  <i class="fa fa-user"></i>
+  </span>
 <% end %>
