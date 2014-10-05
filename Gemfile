@@ -53,3 +53,5 @@ gem 'figaro', '1.0.0'
 gem 'better_errors', '2.0.0'
 gem 'binding_of_caller'
 gem 'websocket-rails', '0.7.0'
+
+gem 'font-awesome-rails', '~> 4.2.0.0'
