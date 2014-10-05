@@ -1,4 +1,4 @@
-class PodsControllerController < ApplicationController
+class PodsController < ApplicationController
 
   before_action :authenticate_user!
 

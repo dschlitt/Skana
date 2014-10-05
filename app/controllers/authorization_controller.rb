@@ -1,8 +1,7 @@
 class AuthorizationController < WebsocketRails::BaseController
   def authorize_channels
     # The channel name will be passed inside the message Hash
-    channel = WebsocketRails[message[:channel]]
-    channel.make_private
+    #channel = WebsocketRails[message[:channel]]
 
     if true
       accept_channel current_user

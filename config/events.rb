@@ -12,7 +12,11 @@ WebsocketRails::EventMap.describe do
   #   end
   # The above will handle an event triggered on the client like `product.new`.
 
-   namespace :websocket_rails do
+  namespace :messages do
+    subscribe :create, to: MessagesController, with_method: :create
+  end
+
+  namespace :websocket_rails do
     subscribe :subscribe_private, :to => AuthorizationController, :with_method => :authorize_channels
   end
 end
