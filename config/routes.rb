@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   resources :pools do
     resources :pool_profiles
+    get :match
   end
 
   resources :pods, only: [:index, :show] do
