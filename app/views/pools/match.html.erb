@@ -1,0 +1,63 @@
+<div id='swiper'>
+<div class='container'>
+  <div class='row'>
+      <% if @next_pp.nil? %>
+        <div class='col-md-4 col-md-offset-4 card'>
+          You're the only one here :( ...
+        </div>
+      <% else %>
+        <div class='col-md-4 col-md-offset-4 card'>
+        <% user = @next_pp.user %>
+
+        <div class='profile-info'>
+          <div class='row'>
+            <div class='avatar col-xs-4 col-xs-offset-4'>
+              <%= image_tag user.avatar %>
+            </div>
+          </div>
+
+          <div class='name'>
+            <%= user.name %>
+          </div>
+
+          <div class='skills'>
+            <span class='profile-label'>Skills:</span>
+            <% if @next_pp.skills %>
+              <%= @next_pp.skills %>
+            <% else %>
+              <em>No skills entered.</em>
+            <% end %>
+          </div>
+
+          <div class='skills'>
+            <span class='profile-label'>Goals:</span>
+            <% if @next_pp.goals %>
+              <%= @next_pp.goals %>
+            <% else %>
+              <em>No goals entered.</em>
+            <% end %>
+          </div>
+        </div>
+
+        <% if pod = user.pods.find_by(pool_id: @pool.id) %>
+          <% if pod.users.count > 0 %>
+            <div class='pod-users'>
+              <span>Pod members</span>
+              <% pod.users.each do |pod_user| %>
+                <% if pod_user != user %>
+                  <%= image_tag pod_user.avatar %>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+        </div>
+
+        <div class='col-md-4 col-md-offset-4 actions'>
+          <button class='action-btn skip' title='Skip'><%= fa_icon 'times' %></button>
+          <button class='action-btn accept' title='Accept'><%= fa_icon 'check' %></button>
+        </div>
+      <% end %>
+  </div>
+</div>
+</div>

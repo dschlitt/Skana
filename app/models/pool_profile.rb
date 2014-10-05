@@ -13,7 +13,7 @@ class PoolProfile < ActiveRecord::Base
     seen_pool_profile_ids.pop
 
     # May be nil -- if you're are the only person in the pool
-    pool_profile || PoolProfile.find(seen_pool_profile_ids.first)
+    pool_profile || PoolProfile.find_by(id: seen_pool_profile_ids.first)
   end
 
 end
