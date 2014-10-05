@@ -17,4 +17,6 @@ Rails.application.routes.draw do
     delete :leave
   end
 
+  resources :swipes, only: [:create]
+
 end
