@@ -1,9 +1,17 @@
+<% content_for :nav_left do %>
+  <%= nav_item_events "left" %>
+<% end %>
+<% content_for :nav_right do %>
+  <%= nav_item_chat "right" %>
+<% end %>
 <div id='swiper'>
 <div class='container'>
   <div class='row'>
       <% if @next_pp.nil? %>
         <div class='col-md-4 col-md-offset-4 card'>
+          <p class='empty'>
           You're the only one here :( ...
+          </p>
         </div>
       <% else %>
         <div class='col-md-4 col-md-offset-4 card'>
@@ -22,42 +30,154 @@
 
           <div class='skills'>
             <span class='profile-label'>Skills:</span>
-            <% if @next_pp.skills %>
-              <%= @next_pp.skills %>
-            <% else %>
-              <em>No skills entered.</em>
-            <% end %>
+            <span class='skills-data'>
+              <% if @next_pp.skills %>
+                <%= @next_pp.skills %>
+              <% else %>
+                <em>No skills entered.</em>
+              <% end %>
+            </span>
           </div>
 
-          <div class='skills'>
+          <div class='goals'>
             <span class='profile-label'>Goals:</span>
-            <% if @next_pp.goals %>
-              <%= @next_pp.goals %>
-            <% else %>
-              <em>No goals entered.</em>
-            <% end %>
+            <span class='goals-data'>
+              <% if @next_pp.goals %>
+                <%= @next_pp.goals %>
+              <% else %>
+                <em>No goals entered.</em>
+              <% end %>
+            </span>
           </div>
         </div>
 
         <% if pod = user.pods.find_by(pool_id: @pool.id) %>
-          <% if pod.users.count > 0 %>
+          <% if pod.present? && pod.users.count > 0 %>
             <div class='pod-users'>
               <span>Pod members</span>
-              <% pod.users.each do |pod_user| %>
-                <% if pod_user != user %>
-                  <%= image_tag pod_user.avatar %>
+              <span class='pod-avatars'>
+                <% pod.users.each do |pod_user| %>
+                  <% if pod_user != user %>
+                    <%= image_tag pod_user.avatar %>
+                  <% end %>
                 <% end %>
-              <% end %>
+              </span>
             </div>
           <% end %>
         <% end %>
         </div>
 
         <div class='col-md-4 col-md-offset-4 actions'>
-          <button class='action-btn skip' title='Skip'><%= fa_icon 'times' %></button>
-          <button class='action-btn accept' title='Accept'><%= fa_icon 'check' %></button>
+          <button id='skip-btn' class='action-btn skip' title='Skip'><%= fa_icon 'times' %></button>
+          <button id='accept-btn' class='action-btn accept' title='Accept'><%= fa_icon 'check' %></button>
         </div>
       <% end %>
   </div>
 </div>
 </div>
+
+<script>
+<% if @next_pp.present? %>
+(function($) {
+
+  var currentProfileID = <%= @next_pp.id %>;
+  var poolID = <%= @pool.id %>;
+
+  var $skipBtn = $('#skip-btn');
+  var $acceptBtn = $('#accept-btn');
+
+  var $card = $('.card');
+
+  $skipBtn.click(function() {
+    sendSwipe(false);
+  });
+
+  $acceptBtn.click(function() {
+    sendSwipe(true);
+  });
+
+  function sendSwipe(rightSwipe) {
+
+    data = {
+      seen_pool_profile_id: currentProfileID,
+      pool_id: poolID,
+      right_swipe: rightSwipe,
+    }
+
+    $.ajax('<%= swipes_path %>', {
+      data: data,
+      complete: function(jqXHR, textStatus) {
+        var data = jqXHR.responseJSON;
+        if (data && data.pool_profile) {
+          // no match, send next profile
+          replaceCard(data.pool_profile, rightSwipe);
+          currentProfileID = data.pool_profile.id;
+        } else if (data) {
+          console.log('matched');
+          window.location = "<%= pods_path %>/" + data.id;
+        } else {
+          $card.html("<p class='empty'>Sory, no more candidates.</p>");
+          $skipBtn.hide();
+          $acceptBtn.hide();
+        }
+        console.log(jqXHR.responseJSON,textStatus)
+      },
+      type: 'POST'
+    });
+
+
+  }
+
+  function replaceCard(data, rightSwipe) {
+    $card.css({position: 'relative'});
+    if (rightSwipe) {
+      var outEnd = $(window).width();
+      var inStart = 0 - $(window).width() / 2 - $card.width();
+    } else {
+      var outEnd = 0 - $(window).width() / 2 - $card.width();
+      var inStart = $(window).width();
+    }
+
+    $card.animate({left: outEnd + 'px'}, {duration: 500});
+    $skipBtn.hide();
+    $acceptBtn.hide();
+
+    setTimeout(function() {
+
+      console.log(data);
+
+      // replace card
+      var skills = data.skills && data.skills.length > 0 ?
+        data.skills : "<em>No skills entered.";
+      var goals = data.goals && data.goals.length > 0 ?
+        data.goals : "<em>No goals entered.";
+      var name = data.user.name;
+      var avatar = data.user.avatar;
+
+      $('.skills-data').html(data.skills);
+      $('.goals-data').html(data.goals);
+      $('.name').html(name);
+      $('.avatar img').attr('src', avatar);
+      $('.pod-avatars').empty();
+      if (data.pod_members) {
+        for(var i = 0; i < data.pod_members.length; i++) {
+          $('.pod-avatars').append('<img src="' + data.pod_members[i]+ '" />');
+        }
+      }
+
+
+      $card.css({left: inStart});
+      $card.animate({left: 0}, {
+        duration: 500,
+        complete: function() {
+          $skipBtn.fadeIn();
+          $acceptBtn.fadeIn();
+        }
+      });
+    }, 701);
+  }
+
+
+}(jQuery));
+<% end %>
+</script>

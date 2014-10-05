@@ -1,5 +1,15 @@
 #swiper {
 
+  .container {
+    overflow: hidden;
+  }
+
+  .empty {
+    padding-top: 2em;
+    padding-bottom: 2em;
+
+  }
+
   img {
     max-width: 100%;
     border-radius: 50%;

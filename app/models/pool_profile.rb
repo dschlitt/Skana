@@ -3,17 +3,18 @@ class PoolProfile < ActiveRecord::Base
   belongs_to :user
 
   def self.next (user, pool)
-    seen_pool_profile_ids = user.seen_pool_profiles.where(pool: pool).ids
 
-    seen_pool_profile_ids << user.pool_profiles.find_by(pool: pool).id
+    blacklist = user.swipes.where(pool: pool).pluck(:seen_pool_profile_id)
 
-    pool_profile = pool.pool_profiles.where.not(id: seen_pool_profile_ids).first
+    blacklist << user.pool_profiles.find_by(pool: pool).id
+
+    pool_profile = pool.pool_profiles.where.not(id: blacklist).first
 
     # Pop the current_user's pool_profile id to avoid matching with self.
-    seen_pool_profile_ids.pop
+    gray_list = user.swipes.where(pool: pool, right_swipe: false).pluck(:seen_pool_profile_id)
 
     # May be nil -- if you're are the only person in the pool
-    pool_profile || PoolProfile.find_by(id: seen_pool_profile_ids.first)
+    pool_profile || PoolProfile.find_by(id: gray_list.first)
   end
 
 end

@@ -55,3 +55,5 @@ gem 'binding_of_caller'
 gem 'websocket-rails', '0.7.0'
 
 gem 'font-awesome-rails', '~> 4.2.0.0'
+
+gem 'active_model_serializers', '0.9.0'
