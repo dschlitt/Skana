@@ -1,0 +1,45 @@
+<div id='messages'>
+</div>
+
+<form id='message-send'>
+  <input type='text' id='message' />
+  <input type='submit' value="Submit" />
+</form>
+
+<script>
+
+(function() {
+  var name = "Batman";
+
+  var dispatcher = new WebSocketRails('localhost:3000/websocket');
+  var channel = dispatcher.subscribe('pod_1');
+
+  channel.on_success = function(current_user) {
+    console.log( current_user.name + "Has joined the channel");
+  }
+
+  channel.on_failure = function(reason) {
+    console.log( "Authorization failed because " + reason.message );
+  }
+
+  var $mesbox = $('#messages');
+
+  channel.bind('message.created', function(data) {
+    console.log('hello');
+    $mesbox.append($("<p>" + data.name + ": " + data.message + "</p>"));
+  });
+
+  $('#message-send').submit(function(event) {
+    console.log('submit');
+    event.preventDefault();
+    var message = $(this).find('input').val();
+
+    channel.trigger('message.created', {
+      name: name,
+      message: message
+    });
+  });
+
+
+}());
+</script>

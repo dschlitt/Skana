@@ -18,3 +18,6 @@
 
 
 //= require_tree .
+//= require tinycolor
+//= require websocket_rails/main
+
