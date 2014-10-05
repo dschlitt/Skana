@@ -9,7 +9,7 @@
 
   <% # List of User pool_profiles %>
   <div class="row">
-    <div class="col-xs-12 col-md-4 col-md-offset-4">
+    <div class="col-xs-12 col-md-4 col-md-offset-4 custom-list">
       <div class="list-group list-pool-items">
         <a class="list-group-title">Your Open Searches</a>
         <% @user.pool_profiles.each do |profile| %>
@@ -17,12 +17,15 @@
             locals: { profile: profile } %>
         <% end %>
       </div>
+      <%= link_to pools_path, class: 'btn btn-default btn-sm list-btn' do %>
+        <i class="fa fa-search"></i> Event
+      <% end %>
     </div>
   </div>
 
   <% # List of User created_pools %>
   <div class="row">
-    <div class="col-xs-12 col-md-4 col-md-offset-4">
+    <div class="col-xs-12 col-md-4 col-md-offset-4 custom-list">
       <div class="list-group list-pool-items">
         <a class="list-group-title">Your Events</a>
         <% @user.created_pools.each do |pool| %>
@@ -30,6 +33,9 @@
             locals: { pool: pool } %>
         <% end %>
       </div>
+      <%= link_to new_pool_path, class: 'btn btn-default btn-sm list-btn' do %>
+        <i class="fa fa-plus"></i> Event
+      <% end %>
     </div>
   </div>
 

@@ -1,31 +1,40 @@
-.list-pool-items {
-  .list-group-title {
-    cursor: default;
-    text-align: center;
-    display: block;
-    color: $lightgray-light;
-    background-color: $darkgray-light;
-    padding: 5px;
-    border-radius: 4px 4px 0 0;
+.custom-list {
+  margin-bottom: 20px;
+
+  .list-btn {
+    float: right;
   }
 
-  .list-group-item {
-    @include clearfix;
+  .list-pool-items {
+    margin-bottom: 10px;
 
-    .btn {
-      float: right;
-      padding: 0px 3px;
-      min-width: 25px;
-      margin-left: 7px;
+    .list-group-title {
+      cursor: default;
+      text-align: center;
+      display: block;
+      color: $lightgray-light;
+      background-color: $darkgray-light;
+      padding: 5px;
+      border-radius: 4px 4px 0 0;
     }
 
-    .list-item-name {
-      width: 70%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: inline-block;
-    }
+    .list-group-item {
+      @include clearfix;
 
+      .btn {
+        float: right;
+        padding: 0px 3px;
+        min-width: 25px;
+        margin-left: 7px;
+      }
+
+      .list-item-name {
+        width: 70%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
+      }
+    }
   }
 }
