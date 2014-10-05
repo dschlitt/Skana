@@ -1,4 +1,4 @@
-<%= form_for :article do |f| %>
+<%= form_for :pool, :url => :pools do |f| %>
   <p>
     <%= f.label :name %><br>
     <%= f.text_field :name %>
@@ -10,23 +10,23 @@
   </p>
 
   <p>
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
+    <%= f.label :location_name %><br>
+    <%= f.text_field :location_name %>
   </p>
 
   <p>
-    <%= f.label :address %><br>
-    <%= f.text_field :address %>
+    <%= f.label :location_address %><br>
+    <%= f.text_field :location_address %>
   </p>
 
   <p>
     <%= f.label :start_date %><br>
-    <%= f.text_field :start_date %>
+    <%= datetime_field(:pool, :start_at) %>
   </p>
 
   <p>
     <%= f.label :end_date %><br>
-    <%= f.text_field :end_date %>
+    <%= datetime_field(:pool, :end_at) %>
   </p>
 
   <p>

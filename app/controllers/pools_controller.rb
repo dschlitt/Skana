@@ -21,8 +21,10 @@ class PoolsController < ApplicationController
 
   def create
     @pool = Pool.new pool_params
+    @pool.creator_id = current_user.id
     flash[:notice] = 'Pool was successfully created.' if @pool.save
-    respond_with @pool
+    #respond_with @pool
+    redirect_to :root
   end
 
   def update
@@ -51,7 +53,7 @@ class PoolsController < ApplicationController
   end
 
   def pool_params
-    params.permit(:name, :name, :creator_id, :description, :start_at, 
+    params.require(:pool).permit(:name, :description, :start_at, 
                   :end_at, :location_name, :location_address)
   end
 
