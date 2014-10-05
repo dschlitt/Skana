@@ -1,6 +1,6 @@
 class PoolsController < ApplicationController
 
-  before_action :set_pool, only: [:update, :edit, :destroy]
+  before_action :set_pool, only: [:show, :update, :edit, :destroy]
   before_action :authenticate_user!
 
   respond_to :html

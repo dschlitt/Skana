@@ -1,2 +1,44 @@
-<%= @pool.inspect %>
-<h1> You successfully created a pool! </h1>
+<% content_for :nav_left do %>
+  <%= nav_item_events "left" %>
+<% end %>
+<% content_for :nav_right do %>
+  <%= nav_item_chat "right" %>
+<% end %>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-xs-12 col-md-4 col-md-offset-4">
+      <span class="name"><%= @pool.name %></span>
+      <div class="list-group show-pool">
+        <% { creator: "Organizer", description: "Description",
+             start_at: "Start Date", end_at: "End Date",
+             location_name: "Location Name",
+             location_address: "Location Address" }.each do |key, val| %>
+          <span class="list-group-item">
+            <h4 class="list-group-item-heading"><%= val %></h4>
+            <% if key == :start_at || key == :end_at %>
+              <p class="list-group-item-text">
+                <%= @pool.send(key).try(:strftime, "%D %r") || "Not Available" %>
+              </p>
+            <% elsif key == :creator %>
+              <p class="list-group-item-text">
+                <%= @pool.send(key).try(:name) || "Not Available" %>
+              </p>
+            <% else %>
+                <p class="list-group-item-text">
+                  <%= @pool.send(key) || "Not Available" %>
+                </p>
+            <% end %>
+          </span>
+        <% end %>
+      </div>
+      <% unless @pool.users.exists?(id: current_user.id) %>
+        <%= link_to 'Join Event', new_pool_pool_profile_path(@pool),
+          class: "btn btn-primary btn-block"  %>
+      <% end %>
+
+    </div>
+  </div>
+
+</div>
