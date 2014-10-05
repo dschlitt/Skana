@@ -5,3 +5,32 @@
   <%= nav_item_chat "right" %>
 <% end %>
 
+<div class="container">
+
+  <% # List of User pool_profiles %>
+  <div class="row">
+    <div class="col-xs-12 col-md-4 col-md-offset-4">
+      <div class="list-group list-pool-items">
+        <a class="list-group-title">Your Open Searches</a>
+        <% @user.pool_profiles.each do |profile| %>
+          <%= render partial: 'shared/list_user_pool_profile',
+            locals: { profile: profile } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <% # List of User created_pools %>
+  <div class="row">
+    <div class="col-xs-12 col-md-4 col-md-offset-4">
+      <div class="list-group list-pool-items">
+        <a class="list-group-title">Your Events</a>
+        <% @user.created_pools.each do |pool| %>
+          <%= render partial: 'shared/list_user_created_pool',
+            locals: { pool: pool } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</div>
