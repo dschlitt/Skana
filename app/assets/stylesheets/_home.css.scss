@@ -22,8 +22,16 @@
       font-weight: thin;
     }
   }
-
+ 
+  #home_button{
+     margin-top: 40%
+   }
+    
   @media (min-width: $screen-sm-min) {
+  #home_button{
+    margin-top: 10%
+   }
+    
   }
 
   @media (min-width: $screen-md-min) {

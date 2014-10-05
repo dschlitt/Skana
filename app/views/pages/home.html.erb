@@ -7,7 +7,7 @@
         <h1>Skana</h1>
         <p>Naturally and Efficiently find team members for any group project.</p>
         <%= link_to user_omniauth_authorize_path(:github),
-          class: 'btn btn-primary btn-lg' do %>
+          class: 'btn btn-primary btn-lg', id: 'home_button' do %>
             <i class="fa fa-github fa-2x" style=" vertical-align: middle;"></i> 
             Login with GitHub
           <% end %>
