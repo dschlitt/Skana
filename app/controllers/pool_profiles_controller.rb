@@ -18,8 +18,10 @@ class PoolProfilesController < ApplicationController
 
   def create
     @pool_profile = @pool.pool_profiles.new pool_profile_params
+    @pool_profile.user_id = current_user.id
     flash[:notice] = 'Pool Profile was successfully created.' if @pool_profile.save
-    respond_with @pool_profile
+    #respond_with @pool_profile
+    #Redirect to Match?
   end
 
   def update

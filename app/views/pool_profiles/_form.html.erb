@@ -1,0 +1,17 @@
+<%= form_for :pool_profiles, :url => :pool_profiles do |f| %>
+
+  <p>
+    <%= f.label :goals %><br>
+    <%= f.text_area :goals %>
+  </p>
+
+    <p>
+    <%= f.label :skills %><br>
+    <%= f.text_area :skills %>
+  </p>
+
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>  
