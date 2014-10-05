@@ -1,7 +1,14 @@
-<%= link_to pod_path(pod.id), class: "list-group-item" do %>
-  <%= pod.pool.name %>
-  <span class="badge badge-primary">
-    <%= pod.users.size %>
-  <i class="fa fa-user"></i>
-  </span>
-<% end %>
+<div class="list-group-item">
+  <%= link_to pod_path(pod.id), class: "list-item-name" do %>
+    <span><%= pod.pool.name %></span>
+    <span class="no-float badge badge-primary">
+      <%= pod.users.size %>
+    </span>
+  <% end %>
+  <%= link_to pod_leave_path(pod),
+    class: "btn btn-primary", method: "DELETE" do %>
+    <span>
+        <i class="fa fa-remove"></i>
+    </span>
+  <% end %>
+</div>
