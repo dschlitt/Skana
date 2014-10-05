@@ -22,6 +22,7 @@ class PoolProfilesController < ApplicationController
     flash[:notice] = 'Pool Profile was successfully created.' if @pool_profile.save
     #respond_with @pool_profile
     #Redirect to Match?
+    redirect_to pool_match_path(@pool)
   end
 
   def update
