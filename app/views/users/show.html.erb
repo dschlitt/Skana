@@ -1,1 +1,7 @@
-<%= @user.inspect %>
+<% content_for :nav_left do %>
+  <%= nav_item_discover "left" %>
+<% end %>
+<% content_for :nav_right do %>
+  <%= nav_item_chat "right" %>
+<% end %>
+

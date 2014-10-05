@@ -1,0 +1,35 @@
+nav {
+  .btn-group {
+    border-bottom: 1px solid $lightgray-dark;
+    border-radius: 0;
+
+    .btn-default {
+      border: none;
+      background-color: $lightgray-light;
+      color: $darkgray-light;
+      font-size: 21px;
+
+      &:hover {
+        background-color: $lightgray-dark;
+      }
+    }
+
+    .btn-name {
+      font-weight: bold;
+      color: $aqua-dark;
+      font-size: 24px;
+
+      &:hover {
+        background-color: $lightgray-light;
+      }
+    }
+
+    .btn-right {
+      text-align: right;
+    }
+
+    .btn-left {
+      text-align: left;
+    }
+  }
+}
