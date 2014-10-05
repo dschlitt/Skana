@@ -18,7 +18,8 @@
 <script>
 
 (function() {
-  var dispatcher = new WebSocketRails('localhost:3000/websocket');
+  <% url = root_url.gsub(/https?:\/\//, "") %>
+  var dispatcher = new WebSocketRails('<%= url %>/websocket');
 
   dispatcher.on_open = function(data) {
     console.log('Connection has been established: ', data);
