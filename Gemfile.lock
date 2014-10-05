@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:catchnz/sass-rails.git
+  remote: git://github.com/catchnz/sass-rails.git
   revision: 00bc429fd25441da727a9f0d3df420080780bb40
   specs:
     sass-rails (5.0.0.beta1)
