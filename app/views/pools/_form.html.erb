@@ -1,35 +1,35 @@
-<%= form_for :pool, :url => :pools do |f| %>
+<%= form_for @pool do |f| %>
   <p>
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: "form-control" %>
   </p>
 
   <p>
     <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <%= f.text_area :description, class: "form-control" %>
   </p>
 
   <p>
     <%= f.label :location_name %><br>
-    <%= f.text_field :location_name %>
+    <%= f.text_field :location_name, class: "form-control" %>
   </p>
 
   <p>
     <%= f.label :location_address %><br>
-    <%= f.text_field :location_address %>
+    <%= f.text_field :location_address, class: "form-control" %>
   </p>
 
   <p>
     <%= f.label :start_date %><br>
-    <%= datetime_field(:pool, :start_at) %>
+    <%= f.datetime_select(:start_at) %>
   </p>
 
   <p>
     <%= f.label :end_date %><br>
-    <%= datetime_field(:pool, :end_at) %>
+    <%= f.datetime_select(:end_at) %>
   </p>
 
   <p>
-    <%= f.submit %>
+    <%= f.submit class: "btn btn-primary btn-block" %>
   </p>
-<% end %>  
+<% end %>

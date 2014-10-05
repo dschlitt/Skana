@@ -28,7 +28,7 @@ class PoolProfilesController < ApplicationController
     if @pool_profile.update pool_profile_params
       flash[:notice] = 'Pool Profile was successfully updated.'
     end
-    respond_with @pool_profile
+    redirect_to :root
   end
 
   def edit
@@ -51,7 +51,7 @@ class PoolProfilesController < ApplicationController
   end
 
   def pool_profile_params
-    params.permit(:goals, :skills)
+    params.require(:pool_profile).permit(:goals, :skills)
   end
 
 end

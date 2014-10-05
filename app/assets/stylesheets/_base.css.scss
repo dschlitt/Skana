@@ -2,3 +2,17 @@ html, body {
   height: 100%;
   width: 100%;
 }
+
+input[type=submit] {
+  margin-top: 30px;
+}
+
+label {
+  font-weight: normal;
+}
+
+.name {
+  text-align: center;
+  display: block;
+  @extend .h5;
+}
