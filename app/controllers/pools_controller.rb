@@ -28,7 +28,7 @@ class PoolsController < ApplicationController
   end
 
   def update
-    flash[:notice] = 'Pool was successfully updated.' if @pool.save
+    @pool.update pool_params
     respond_with @pool
   end
 
