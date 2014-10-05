@@ -1,0 +1,64 @@
+#chat-pod {
+
+  position: absolute;
+  top: 50px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  .container, .row {
+    height: 100%;
+  }
+
+  .chat-container {
+    height: 100%;
+  }
+
+  #messages {
+    position: absolute;
+    top: 40px;
+    bottom: 90px;
+    left: 0;
+    right: 0;
+    overflow-y: scroll;
+  }
+
+  #message-form {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .name {
+    font-weight: bold;
+    display: inline-block;
+    padding-right: 0.5em;
+    &:after {
+      content: ":";
+    }
+  }
+
+  #avatars {
+    height: 30px;
+    position: absolute;
+    top: 5px;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid $lightgray-dark;
+    text-align: right;
+    img {
+      width: 25px;
+      border-radius: 50%;
+      border: 1px solid $lightgray-dark;
+    }
+  }
+
+  @media (max-width: $screen-sm-max) {
+    #message-form, #messages, #avatars {
+      left: $grid-gutter-width / 2;
+      right: $grid-gutter-width / 2;
+    }
+  }
+
+}

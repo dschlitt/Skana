@@ -1,19 +1,35 @@
+<div id='chat-pod'>
 
-<div id='messages'>
-  <% @pod.messages.each do |m| %>
-    <p>
-    <span class='name'><%= m.user.name %></span>
-    <span class='body'><%= m.text_body %></span>
-    </p>
-  <% end %>
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-4 col-md-offset-4 chat-container'>
+      <div id='avatars'>
+        <% @pod.users.each do |user| %>
+          <%= image_tag user.avatar %>
+        <% end %>
+      </div>
+      <div id='messages'>
+        <!--
+        <% @pod.messages.each do |m| %>
+          <p>
+          <span class='name'><%= m.user.name %></span>
+          <span class='body'><%= m.text_body %></span>
+          </p>
+        <% end %>
+        -->
+      </div>
+
+      <form id='message-form' role='role'>
+        <div class='form-group'>
+          <input type='text' class='form-control' id='message-body' placeholder='Message body'/>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </div>
+  </div>
 </div>
 
-<form id='message-form' role='role'>
-  <div class='form-group'>
-    <input type='text' class='form-control' id='message-body' placeholder='Message body'/>
-  </div>
- <button type="submit" class="btn btn-default">Submit</button>
-</form>
+</div>
 
 <script>
 
@@ -26,6 +42,24 @@
     // You can trigger new server events inside this callback if you wish.
   }
 
+  <% data = @pod.messages.reduce([]) do |array, m|
+    array << {
+      name: m.user.name,
+      text_body: m.text_body
+    }
+  end
+
+  %>
+  var message_data = <%= data.to_json.html_safe %>;
+
+  $(document).ready(function() {
+    for (var i = 0; i < message_data.length; i++) {
+      addMessage(message_data[i]);
+    }
+    setTimeout(function() {
+      $messages.animate({scrollTop: $messages.prop('scrollHeight')});
+    }, 0)
+  })
 
   var channel = dispatcher.subscribe_private('pod_<%= @pod.id %>');
   channel.on_success = function(resp) {
@@ -57,6 +91,10 @@
     }, function(response) {
       console.log('fail', response);
     });
+
+    $input.val('');
+    $messages.animate({scrollTop: $messages.prop('scrollHeight')});
+
 
     //channel.trigger('messages.created', data);
   })
