@@ -1,0 +1,23 @@
+<% content_for :nav_left do %>
+  <%= nav_item_events "left" %>
+<% end %>
+<% content_for :nav_right do %>
+  <%= nav_item_chat "right" %>
+<% end %>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-xs-12 col-md-4 col-md-offset-4">
+
+      <div class="list-group list-pool-items">
+        <a class="list-group-title">Discover Aspirations</a>
+        <% @pools.each do |pool| %>
+          <%= render partial: 'shared/list_pool', locals: { pool: pool } %>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+
+</div>
