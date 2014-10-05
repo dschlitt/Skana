@@ -1,0 +1,17 @@
+<div class="list-group-item">
+  <%= link_to pool_match_path(profile.pool), class: "list-item-name" do %>
+    <span><%= profile.pool.name %></span>
+  <% end %>
+  <%= link_to edit_pool_pool_profile_path(profile.pool, profile),
+    class: "btn btn-primary" do %>
+    <span>
+        <i class="fa fa-edit"></i>
+    </span>
+  <% end %>
+  <%= link_to pool_pool_profile_path(profile.pool, profile),
+    class: "btn btn-primary" do %>
+    <span>
+        <i class="fa fa-info"></i>
+    </span>
+  <% end %>
+</div>
