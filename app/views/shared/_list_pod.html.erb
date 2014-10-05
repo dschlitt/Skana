@@ -1,0 +1,7 @@
+<%= link_to pod_path(pod.id), class: "list-group-item" do %>
+  <%= pod.pool.name %>
+  <span class="badge badge-primary">
+    <%= pod.users.size %>
+  <i class="fa fa-user"></i>
+  </span>
+<% end %>

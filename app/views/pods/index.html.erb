@@ -1,2 +1,23 @@
-<h1>PodsController#index</h1>
-<p>Find me in app/views/pods_controller/index.html.erb</p>
+<% content_for :nav_left do %>
+  <%= nav_item_events "left" %>
+<% end %>
+<% content_for :nav_right do %>
+  <%= nav_item_discover "right" %>
+<% end %>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-xs-12 col-md-4 col-md-offset-4 custom-list">
+
+      <div class="list-group list-pool-items">
+        <a class="list-group-title">Your Pods</a>
+        <% @pods.each do |pod| %>
+          <%= render partial: 'shared/list_pod', locals: { pod: pod } %>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+
+</div>
