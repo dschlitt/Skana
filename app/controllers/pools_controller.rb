@@ -1,6 +1,6 @@
 class PoolsController < ApplicationController
 
-  before_action :set_pool, only: [:show, :update, :edit, :destroy]
+  before_action :set_pool, only: [:update, :edit, :destroy]
   before_action :authenticate_user!
 
   respond_to :html
@@ -36,13 +36,18 @@ class PoolsController < ApplicationController
 
   def destroy
     @pool.destroy
-    redirect_to :root 
+    redirect_to :root
+  end
+
+  def match
+    @pool = current_user.pools.find params[:pool_id]
+    @next_pp = PoolProfile.next(current_user, @pool)
   end
 
   private
 
   def set_pool
-    @pool = Pool.find params[:pool_id]
+    @pool = Pool.find params[:id]
   end
 
   def pool_params
