@@ -36,7 +36,7 @@ class SwipesController < ApplicationController
     end
 
     def set_pool
-      @pool = Pool.find(@swipe.pool_id)
+      @pool = Pool.friendly.find(@swipe.pool_id)
     end
 
 end
