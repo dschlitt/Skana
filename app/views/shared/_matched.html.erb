@@ -1,0 +1,8 @@
+<script>
+
+  var url = "<%= root_url.gsub(/https?:\/\//, "") %>";
+  var socketManager = webSocketManager(url);
+  socketManager.matchNotifier(<%= current_user.pools.pluck :id %>);
+  socketManager.messageNotifier(<%= current_user.pods.pluck :id %>);
+
+</script>

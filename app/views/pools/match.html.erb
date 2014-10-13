@@ -112,9 +112,6 @@
           // no match, send next profile
           replaceCard(data.pool_profile, rightSwipe);
           currentProfileID = data.pool_profile.id;
-        } else if (data) {
-          console.log('matched');
-          window.location = "<%= pods_path %>/" + data.id;
         } else {
           $card.html("<p class='empty'>Sory, no more candidates.</p>");
           $skipBtn.hide();

@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootflat
+//= require webSocketManager
 
 
 
