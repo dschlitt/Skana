@@ -42,14 +42,14 @@ class PoolsController < ApplicationController
   end
 
   def match
-    @pool = current_user.pools.find params[:pool_id]
+    @pool = current_user.pools.friendly.find params[:pool_id]
     @next_pp = PoolProfile.next(current_user, @pool)
   end
 
   private
 
   def set_pool
-    @pool = Pool.find params[:id]
+    @pool = Pool.friendly.find params[:id]
   end
 
   def pool_params

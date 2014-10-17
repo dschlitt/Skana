@@ -70,7 +70,7 @@ class SwipesController < ApplicationController
       else
         # don't have match
 
-        @next_pp = PoolProfile.next(current_user, Pool.find(params[:pool_id]))
+        @next_pp = PoolProfile.next(current_user, Pool.friendly.find(params[:pool_id]))
         puts "\n\n\n\n\n"
         puts "render next"
         puts "\n\n\n\n\n"
@@ -79,7 +79,7 @@ class SwipesController < ApplicationController
 
     else
 
-      @next_pp = PoolProfile.next(current_user, Pool.find(params[:pool_id]))
+      @next_pp = PoolProfile.next(current_user, Pool.friendly.find(params[:pool_id]))
       puts "\n\n\n\n\n"
       puts "render next, swipe left"
       puts "\n\n\n\n\n"
