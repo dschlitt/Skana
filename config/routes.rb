@@ -19,4 +19,6 @@ Rails.application.routes.draw do
 
   resources :swipes, only: [:create]
 
+  get '/:id', to: 'pools#show'
+
 end

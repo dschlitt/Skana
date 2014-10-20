@@ -44,7 +44,7 @@ class PoolProfilesController < ApplicationController
   private
 
   def set_pool
-    @pool = Pool.find params[:pool_id]
+    @pool = Pool.friendly.find params[:pool_id]
   end
 
   def set_pool_profile
