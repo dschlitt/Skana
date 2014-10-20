@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141017145239) do
+ActiveRecord::Schema.define(version: 20141020140507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,7 +41,10 @@ ActiveRecord::Schema.define(version: 20141017145239) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "pool_id"
+    t.datetime "deleted_at"
   end
+
+  add_index "pods", ["deleted_at"], name: "index_pods_on_deleted_at", using: :btree
 
   create_table "pods_users", id: false, force: true do |t|
     t.integer "user_id"

@@ -10,8 +10,15 @@ class PodsController < ApplicationController
   end
 
   def show
-    @pod = current_user.pods.find params[:id]
-    respond_with @pod
+    @pod = current_user.pods.with_deleted.find params[:id]
+
+    if @pod.destroyed?
+      pods = @pod.pool.pods
+      @pod = pods.includes(:users).where('users.id' => current_user.id).first
+      redirect_to @pod
+    else
+      respond_with @pod
+    end
   end
 
   def leave
