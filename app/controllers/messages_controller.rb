@@ -18,7 +18,9 @@ class MessagesController < WebsocketRails::BaseController
 
         data = {
           name: current_user.name,
-          text_body: message[:text_body]
+          pod_id: pod.id,
+          text_body: message[:text_body],
+          user_id: current_user.id
         }
 
         trigger_success message: "success"
