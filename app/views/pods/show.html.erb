@@ -41,92 +41,31 @@
 <script>
 
 (function() {
-  <% url = root_url.gsub(/https?:\/\//, "") %>
-  var dispatcher = new WebSocketRails('<%= url %>/websocket');
-
-  dispatcher.on_open = function(data) {
-    console.log('Connection has been established: ', data);
-    // You can trigger new server events inside this callback if you wish.
-  }
 
   <% data = @pod.messages.reduce([]) do |array, m|
     array << {
+      pod_id: m.id,
+      user_id: m.user.id,
       name: m.user.name,
       text_body: m.text_body
     }
-  end
+  end %>
 
-  %>
-  var message_data = <%= data.to_json.html_safe %>;
-
-  $(document).ready(function() {
-    for (var i = 0; i < message_data.length; i++) {
-      addMessage(message_data[i]);
-    }
-    setTimeout(function() {
-      $messages.animate({scrollTop: 10000});
-    }, 0)
-  })
-
-  var channel = dispatcher.subscribe_private('pod_<%= @pod.id %>');
-  channel.on_success = function(resp) {
-    console.log('channel', resp);
-  };
-
-  var $messages = $('#messages');
-
-  // listen on the channel
-  channel.bind('messages.created', function(data) {
-    addMessage(data);
-  });
-
-  // send on the event router
-  $form = $('#message-form');
-  $input = $form.find('#message-body');
-
-  $form.submit(function(evt) {
-    evt.preventDefault();
-
-    var data = {
-      pod_id: <%= @pod.id %>,
-      text_body: $input.val(),
-      name: '<%= current_user.name %>',
-    }
-
-    dispatcher.trigger('messages.create', data, function(response) {
-      console.log('success', response);
-    }, function(response) {
-      console.log('fail', response);
-    });
-
-    $input.val('');
-    $messages.animate({scrollTop: 10000});
-
-
-    //channel.trigger('messages.created', data);
-  })
-
-  function getColor(name) {
-    var sum = 0;
-    for (var i = 0; i < name.length - 1; i++) {
-      sum += name.charCodeAt(i);
-    }
-
-    var h = sum % 16 * 16, s = 78 + name.length % 20 - 10, b = 30 + name.length % 10 - 5;
-    var color = tinycolor({h: h, s: s, l: b});
-    return color.toHexString();
-
+  var eventAggregator = $('body');
+  var data = {
+    userName: '<%= current_user.name %>',
+    podId: <%= @pod.id %>,
+    messageData: <%= data.to_json.html_safe %>
+  }
+  var elements = {
+    messages: $('#messages'),
+    avatars: $('#avatars'),
+    form: $('#message-form'),
+    input: $('#message-form #message-body')
   }
 
-  function addMessage(data) {
-    var color = getColor(data.name);
-    $messages.append(
-        "<p>"
-        + "<span class='name' style='color:" + color + ";'>" + data.name + "</span>"
-        + "<span class='body'>" + data.text_body + "</span>"
-        + "</p>"
-        );
-  }
+  var chat = chatService(eventAggregator, data, elements);
+  chat.start();
 
 }());
 </script>

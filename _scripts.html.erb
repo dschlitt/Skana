@@ -1,0 +1,11 @@
+<script>
+
+  (function() {
+    var url = "<%= root_url.gsub(/https?:\/\//, "") %>";
+    var eventAggregator = $("body");
+    var socketManager = webSocketManager(url, eventAggregator);
+    socketManager.matchListener(<%= current_user.pools.pluck :id %>);
+    socketManager.messageListener(<%= current_user.pods.pluck :id %>);
+  }());
+
+</script>
