@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   resources :swipes, only: [:create]
 
-  get '/:id', to: 'pools#show', constraints: {id: /(?!websocket)/ }
+  match "/websocket", :to => WebsocketRails::ConnectionManager.new, via: [:get, :post]
 
+  get '/:id', to: 'pools#show'
 end
