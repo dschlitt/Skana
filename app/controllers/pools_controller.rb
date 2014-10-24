@@ -1,7 +1,7 @@
 class PoolsController < ApplicationController
 
   before_action :set_pool, only: [:show, :update, :edit, :destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :show
 
   respond_to :html
 
@@ -11,6 +11,9 @@ class PoolsController < ApplicationController
   end
 
   def show
+    if !user_signed_in?
+      store_location_for :user, pool_path(@pool)
+    end
     respond_with @pool
   end
 
