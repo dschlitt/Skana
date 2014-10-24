@@ -1,8 +1,16 @@
-<% content_for :nav_left do %>
-  <%= nav_item_events "left" %>
-<% end %>
-<% content_for :nav_right do %>
-  <%= nav_item_chat "right" %>
+<% if user_signed_in? %>
+  <% content_for :nav_left do %>
+    <%= nav_item_events "left" %>
+  <% end %>
+  <% content_for :nav_right do %>
+    <%= nav_item_chat "right" %>
+  <% end %>
+<% else %>
+  <nav>
+    <div class="btn-group btn-group-justified">
+      <a class="btn btn-default btn-name">Skana</a>
+    </div>
+  </nav>
 <% end %>
 
 <div class="container">
