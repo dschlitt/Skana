@@ -8,4 +8,8 @@ class ApplicationController < ActionController::Base
   def new_session_path(scope)
     new_user_session_path
   end
+
+  def authenticate_user!
+    redirect_to root_path if !user_signed_in?
+  end
 end
