@@ -33,8 +33,13 @@
           </span>
         <% end %>
       </div>
-      <% unless @pool.users.exists?(id: current_user.id) %>
-        <%= link_to 'Join Event', new_pool_pool_profile_path(@pool),
+      <% if user_signed_in? %>
+        <% unless @pool.users.exists?(id: current_user.id) %>
+          <%= link_to 'Join Event', new_pool_pool_profile_path(@pool),
+            class: "btn btn-primary btn-block"  %>
+        <% end %>
+      <% else %>
+        <%= link_to 'Login with GitHub to join', user_omniauth_authorize_path(:github),
           class: "btn btn-primary btn-block"  %>
       <% end %>
 
