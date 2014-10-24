@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :pool_profiles
   has_and_belongs_to_many :pods
   has_many :created_pools, class_name: 'Pool', foreign_key: 'creator_id'
+  has_many :resource_views
 
   def self.from_omniauth(auth)
     user = where(provider: auth.provider, uid: auth.uid).first_or_initialize do |u|
