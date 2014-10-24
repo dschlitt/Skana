@@ -80,10 +80,11 @@ function chatService(eventAggregator, data, elements) {
   function addMessage(data) {
     var name = data.name || "Anon" + data.user_id;
     var color = getColor(name);
+    var text = stripTags(data.text_body);
 
     $messages.append(
       "<p>" + "<span class='name' style='color:" + color + ";'>" + name +
-      "</span>" + "<span class='body'>" + data.text_body + "</span>" + "</p>"
+      "</span>" + "<span class='body'>" + text + "</span>" + "</p>"
     );
   }
 
