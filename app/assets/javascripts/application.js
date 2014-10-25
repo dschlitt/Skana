@@ -16,6 +16,7 @@
 //= require underscore.stripTags
 //= require webSocketManager
 //= require chat
+//= require chatNotification
 
 
 

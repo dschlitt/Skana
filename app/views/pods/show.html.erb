@@ -40,7 +40,7 @@
 
 <script>
 
-(function() {
+(function(global) {
 
   <% data = @pod.messages.reduce([]) do |array, m|
     array << {
@@ -64,8 +64,14 @@
     input: $('#message-form #message-body')
   }
 
-  var chat = chatService(eventAggregator, data, elements);
-  chat.start();
+  global.Skana = global.Skana || {};
+  global.Skana.chat = chatService(eventAggregator, data, elements);
+  global.Skana.chat.start();
 
-}());
+  <% content_for :stop_chat_notifier do %>
+    global.Skana.chatNotifier.clear();
+    global.Skana.chatNotifier.stop();
+  <% end %>
+
+}(this));
 </script>

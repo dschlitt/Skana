@@ -16,3 +16,7 @@ label {
   display: block;
   @extend .h5;
 }
+
+.hidden {
+  visibility: hidden;
+}
