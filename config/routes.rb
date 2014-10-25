@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   resources :pods, only: [:index, :show] do
     delete :leave
+    put :messages_seen
+    patch :messages_seen
   end
 
   resources :swipes, only: [:create]

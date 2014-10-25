@@ -1,7 +1,7 @@
 module NavItemHelper
   def nav_item_chat alignment
     ("<a href='#{pods_path}' class='btn btn-default btn-#{alignment}'>" +
-     "<i class='fa fa-comments'></i></a>").html_safe
+     "<i class='fa fa-comments'></i>#{current_user.new_message_count}</a>").html_safe
   end
 
   def nav_item_discover alignment

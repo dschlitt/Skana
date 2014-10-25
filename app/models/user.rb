@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   has_many :pool_profiles
   has_and_belongs_to_many :pods
   has_many :created_pools, class_name: 'Pool', foreign_key: 'creator_id'
-  has_many :resource_views
+  has_many :message_views, -> { message }, class_name: 'ResourceView'
 
   def self.from_omniauth(auth)
     user = where(provider: auth.provider, uid: auth.uid).first_or_initialize do |u|
@@ -36,4 +36,23 @@ class User < ActiveRecord::Base
       end
     end
   end
+
+  def new_message_count
+    total_unseen = 0
+
+    self.pods.each do |pod|
+      msg_view = self.message_views.find_by(viewable: pod)
+
+      viewed_at = msg_view.try(:last_viewed_at)
+
+      if viewed_at.present?
+        total_unseen += pod.messages.where('created_at >= ?', viewed_at).size
+      else
+        total_unseen += pod.messages.all.size
+      end
+    end
+
+    total_unseen
+  end
+
 end
