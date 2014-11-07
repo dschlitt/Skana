@@ -1,11 +1,23 @@
 <script>
 
-  (function() {
+  (function(global) {
+
     var url = "<%= root_url.gsub(/https?:\/\//, "") %>";
-    var eventAggregator = $("body");
-    var socketManager = webSocketManager(url, eventAggregator);
-    socketManager.matchListener(<%= current_user.pools.pluck :id %>);
-    socketManager.messageListener(<%= current_user.pods.pluck :id %>);
-  }());
+    var eventAggregator = $('body');
+    var $chatNotification = $('.chat-notification').length === 0 ?
+      null : $('.chat-notification')
+
+    global.Skana = global.Skana || {};
+
+    global.Skana.socketManager = webSocketManager(url, eventAggregator);
+    global.Skana.socketManager.matchListener(<%= current_user.pools.pluck :id %>);
+    global.Skana.socketManager.messageListener(<%= current_user.pods.pluck :id %>);
+
+    global.Skana.chatNotifier = chatNotificationService(eventAggregator,
+      <%= current_user.new_message_count %>, $chatNotification)
+    global.Skana.chatNotifier.start();
+    <%= yield :stop_chat_notifier %>
+
+  }(this));
 
 </script

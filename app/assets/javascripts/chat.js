@@ -30,6 +30,11 @@ function chatService(eventAggregator, data, elements) {
       $messages.animate({scrollTop: 10000});
     }, 0);
 
+    // notify client of seen messages
+    if (messageData.length > 0) {
+      notifyServerOfSeenMessages();
+    }
+
   }
 
   function receiveMessages() {
@@ -37,6 +42,7 @@ function chatService(eventAggregator, data, elements) {
       // only display messages from this pod
       if (podId === data.pod_id) {
         addMessage(data);
+        notifyServerOfSeenMessages();
       }
     });
   }
@@ -60,6 +66,13 @@ function chatService(eventAggregator, data, elements) {
           $avatars.append("<img src='" + data.new_users[i].avatar + "'>");
         }
       }
+    });
+  }
+
+  function notifyServerOfSeenMessages() {
+    jQuery.ajax({
+      url: "/pods/" + podId + "/messages_seen",
+      type: "PUT"
     });
   }
 

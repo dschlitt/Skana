@@ -2,7 +2,7 @@ class PodsController < ApplicationController
 
   before_action :authenticate_user!
 
-  respond_to :html
+  respond_to :html, :js
 
   def index
     @pods = current_user.pods
@@ -24,6 +24,14 @@ class PodsController < ApplicationController
   def leave
     current_user.pods.find(params[:pod_id]).destroy
     redirect_to :root
+  end
+
+  def messages_seen
+    pod = Pod.find params[:pod_id]
+    resource_view = ResourceView.where({ viewable: pod, user: current_user,
+      resource_type: 'Message' }).first_or_create
+    resource_view.update_attributes(last_viewed_at: Time.now)
+    head :no_content
   end
 
 end

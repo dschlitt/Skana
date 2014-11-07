@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141020140507) do
+ActiveRecord::Schema.define(version: 20141024200759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,21 @@ ActiveRecord::Schema.define(version: 20141020140507) do
   end
 
   add_index "pools", ["slug"], name: "index_pools_on_slug", unique: true, using: :btree
+
+  create_table "readers_seen_messages", force: true do |t|
+    t.integer "reader_id"
+    t.integer "seen_message_id"
+  end
+
+  create_table "resource_views", force: true do |t|
+    t.integer  "viewable_id"
+    t.string   "viewable_type"
+    t.integer  "user_id"
+    t.string   "resource_type"
+    t.datetime "last_viewed_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "swipes", force: true do |t|
     t.boolean "right_swipe",          default: false
